@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>test_binary_tree.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>B36EF0F21BE7C85F0090CF3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B36EF10A1BE7ED230090CF3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
