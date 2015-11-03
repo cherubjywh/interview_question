@@ -23,12 +23,15 @@ BOOST_AUTO_TEST_CASE(parseString)
     vector<string> tokens;
     parse_string("1,#,2,3", tokens);
     BOOST_CHECK_EQUAL(tokens.size(), 4);
+
+    TreeNode<int>* head;
+    build_int_tree("1,#,2,#,3", &head);
     
-    for (auto &t : tokens)
-    {
-        cout << t << ", ";
-    }
-    cout <<endl;
+    BOOST_CHECK_EQUAL(head->val, 1);
+//    BOOST_CHECK_EQUAL(head->left, nullptr);
+    BOOST_CHECK_EQUAL(head->right->val, 2);
+    BOOST_CHECK_EQUAL(head->right->right->val, 3);
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

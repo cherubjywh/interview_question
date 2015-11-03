@@ -36,6 +36,8 @@ void build_int_tree(string input, TreeNode<int> ** head)
             q.push(current -> left);
         }
         ++index;
+        if (index >= tokens.size())
+            break;
         // right node
         if (tokens[index] != "#") {
             current -> right = new TreeNode<int> (stoi(tokens[index]));
