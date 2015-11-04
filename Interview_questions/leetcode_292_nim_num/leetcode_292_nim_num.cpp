@@ -13,6 +13,12 @@
 
 using namespace std;
 
+bool canWinNimV1(int n) {
+//    1 1 1 0 1 1 1 0
+    if (n % 4 == 0) return false;
+    else return true;
+}
+
 bool canWinNim(int n) {
     if (n == 1) {
         return true;
@@ -47,7 +53,7 @@ int main(int argc, char * argv[]) {
     clock_t begin = clock();
     
     for (int i = 1; i <= 100; ++i) {
-        if (canWinNim(i))
+        if (canWinNimV1(i))
             ++count;
     }
     
