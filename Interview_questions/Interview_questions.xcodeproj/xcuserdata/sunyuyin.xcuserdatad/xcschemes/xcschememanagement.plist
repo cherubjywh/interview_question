@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>leetcode_292_nim_num.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>test_binary_tree.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>B36EF10A1BE7ED230090CF3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B36EF1181BE9DFCB0090CF3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
