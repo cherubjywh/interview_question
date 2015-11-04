@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>google_rain_drop.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>leetcode_292_nim_num.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>B36EF1181BE9DFCB0090CF3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B36EF1231BE9E8070090CF3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

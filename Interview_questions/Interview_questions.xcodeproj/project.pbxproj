@@ -14,6 +14,7 @@
 		B36EF1131BE7ED780090CF3F /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36EF0FE1BE7C8A40090CF3F /* BinaryTree.cpp */; };
 		B36EF1141BE7ED7B0090CF3F /* core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36EF1011BE7D0F80090CF3F /* core.cpp */; };
 		B36EF11C1BE9DFCB0090CF3F /* leetcode_292_nim_num.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36EF11B1BE9DFCB0090CF3F /* leetcode_292_nim_num.cpp */; };
+		B36EF1271BE9E8070090CF3F /* google_rain_drop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B36EF1261BE9E8070090CF3F /* google_rain_drop.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		B36EF1221BE9E8070090CF3F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +67,8 @@
 		B36EF10B1BE7ED230090CF3F /* test_binary_tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_binary_tree; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36EF1191BE9DFCB0090CF3F /* leetcode_292_nim_num */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = leetcode_292_nim_num; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36EF11B1BE9DFCB0090CF3F /* leetcode_292_nim_num.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = leetcode_292_nim_num.cpp; path = ../leetcode_292_nim_num/leetcode_292_nim_num.cpp; sourceTree = "<group>"; };
+		B36EF1241BE9E8070090CF3F /* google_rain_drop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = google_rain_drop; sourceTree = BUILT_PRODUCTS_DIR; };
+		B36EF1261BE9E8070090CF3F /* google_rain_drop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = google_rain_drop.cpp; path = ../google_rain_drop/google_rain_drop.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +87,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B36EF1161BE9DFCB0090CF3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B36EF1211BE9E8070090CF3F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,6 +119,7 @@
 				B36EF0F31BE7C85F0090CF3F /* Interview_questions */,
 				B36EF10B1BE7ED230090CF3F /* test_binary_tree */,
 				B36EF1191BE9DFCB0090CF3F /* leetcode_292_nim_num */,
+				B36EF1241BE9E8070090CF3F /* google_rain_drop */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				B36EF11B1BE9DFCB0090CF3F /* leetcode_292_nim_num.cpp */,
+				B36EF1261BE9E8070090CF3F /* google_rain_drop.cpp */,
 				B36EF0F61BE7C85F0090CF3F /* main.cpp */,
 			);
 			path = Interview_questions;
@@ -186,6 +207,23 @@
 			productReference = B36EF1191BE9DFCB0090CF3F /* leetcode_292_nim_num */;
 			productType = "com.apple.product-type.tool";
 		};
+		B36EF1231BE9E8070090CF3F /* google_rain_drop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B36EF1281BE9E8070090CF3F /* Build configuration list for PBXNativeTarget "google_rain_drop" */;
+			buildPhases = (
+				B36EF1201BE9E8070090CF3F /* Sources */,
+				B36EF1211BE9E8070090CF3F /* Frameworks */,
+				B36EF1221BE9E8070090CF3F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = google_rain_drop;
+			productName = google_rain_drop;
+			productReference = B36EF1241BE9E8070090CF3F /* google_rain_drop */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -202,6 +240,9 @@
 						CreatedOnToolsVersion = 6.2;
 					};
 					B36EF1181BE9DFCB0090CF3F = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					B36EF1231BE9E8070090CF3F = {
 						CreatedOnToolsVersion = 6.2;
 					};
 				};
@@ -221,6 +262,7 @@
 				B36EF0F21BE7C85F0090CF3F /* Interview_questions */,
 				B36EF10A1BE7ED230090CF3F /* test_binary_tree */,
 				B36EF1181BE9DFCB0090CF3F /* leetcode_292_nim_num */,
+				B36EF1231BE9E8070090CF3F /* google_rain_drop */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +293,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B36EF11C1BE9DFCB0090CF3F /* leetcode_292_nim_num.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B36EF1201BE9E8070090CF3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B36EF1271BE9E8070090CF3F /* google_rain_drop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +445,24 @@
 			};
 			name = Release;
 		};
+		B36EF1291BE9E8070090CF3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B36EF12A1BE9E8070090CF3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -428,6 +496,14 @@
 			buildConfigurations = (
 				B36EF11E1BE9DFCB0090CF3F /* Debug */,
 				B36EF11F1BE9DFCB0090CF3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B36EF1281BE9E8070090CF3F /* Build configuration list for PBXNativeTarget "google_rain_drop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B36EF1291BE9E8070090CF3F /* Debug */,
+				B36EF12A1BE9E8070090CF3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
