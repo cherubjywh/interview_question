@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 Yuyin Sun. All rights reserved.
 //
 
+// My codes look very ugly!! Work hard!! Improve my coding skill!!
+
 #include <iostream>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
