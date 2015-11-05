@@ -10,6 +10,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <map>
+#include <set>
 
 
 /*
@@ -29,33 +30,62 @@ using namespace std;
 
 
 double random_raindrop(random::mt19937& gen, double total_length) {
-    random::uniform_int_distribution<>dist(1, 100);
-    return (dist(gen) * total_length)/100;
+    random::uniform_int_distribution<>dist(1, 1000);
+    return (dist(gen) * total_length)/1000 - 0.5;
 }
 
-bool is_intersect(double raindrop_start_point, double raindrop_length, double seg_start_point, double seg_length) {
+bool is_intersect(double raindrop_start_point, double raindrop_length, double seg_start_point, double seg_end_point) {
     double raindrop_end_point = raindrop_start_point + raindrop_length;
-    double seg_end_point = seg_start_point + seg_length;
     
     if (seg_end_point >= raindrop_start_point && seg_end_point <= raindrop_end_point) {
         return true;
     }
     
-    if (raindrop_end_point >= seg_end_point && raindrop_end_point <= raindrop_end_point) {
+    if (raindrop_end_point >= seg_start_point && raindrop_end_point <= seg_end_point) {
         return true;
     }
     
     return false;
 }
 
+void process_dry_segments(map<double, double>& dry_segments, map<double, double>::iterator& iter, double raindrop_start_point, double raindrop_length, map<double, double>& temp, set<double>& temp_erase, double total_length) {
+    double left = max(raindrop_start_point, iter -> first);
+    double right = min(min(raindrop_start_point + raindrop_length, iter -> second), total_length);
+
+    
+    if (left >= iter -> first && right <= iter -> second) {
+        temp_erase.insert(iter -> first);
+        temp[iter -> first] = left;
+        temp[right] = iter -> second;
+        return;
+    }
+    
+    if (left >= iter -> first) {
+        temp_erase.insert(iter -> first);
+        dry_segments[iter -> first] = raindrop_start_point;
+        return;
+    }
+    
+    temp_erase.insert(iter -> first);
+    temp[raindrop_start_point + raindrop_length] = iter -> second;
+    
+}
+
 void raindrop_simulation(double raindrop_length, double total_length, random::mt19937& gen) {
     map<double, double> dry_segments;
     dry_segments.insert(pair<double, double>(0.0, total_length));
     
+    size_t iteration = 0;
     while (!dry_segments.empty()) {
+        
+//        cout << "iter " << iteration << ": " << dry_segments.size() << endl;
+        ++iteration;
+        
+        
         double raindrop_start_point = random_raindrop(gen, total_length);
-        map<double, double>::iterator cand_seg = dry_segments.upper_bound(raindrop_start_point);
-        /* 
+
+        
+        /*
          Here I need to start searching backward, as well as searching forward
          Originally I though about searching just one segment forward and one segment backward. However, it does not guaranteed to work if the raindrop size is too big, and it covers multiple dry segments
          The problem is quite tricky
@@ -74,8 +104,51 @@ void raindrop_simulation(double raindrop_length, double total_length, random::mt
          
          */
          
+        auto iter = dry_segments.lower_bound(raindrop_start_point);
+        map<double, double> temp;
+        set<double> temp_remove;
+        
+        if (iter != dry_segments.begin())
+            --iter;
+        
+        if (!is_intersect(raindrop_start_point, raindrop_length, iter -> first, iter -> second)) {
+            ++iter;
+        }
+        
+        
+        for (; iter != dry_segments.end(); ++iter) {
+            bool flag_intersect = is_intersect(raindrop_start_point, raindrop_length, iter -> first, iter -> second);
+            if (!flag_intersect)
+                break;
+            
+            /*
+             case 1: raindrop covers the whole segment, then the whole segment will removed from the map
+             case 2: raindrop is fully covered in the segment, then the segment will be divided into two regions
+             case 3: raindrop has intersection with the segment, then update the segment size
+             */
+            
+            process_dry_segments(dry_segments, iter, raindrop_start_point, raindrop_length, temp, temp_remove, total_length);
+        }
+        
+        for (auto val:temp_remove) {
+            dry_segments.erase(val);
+        }
+        
+        for (auto & p:temp) {
+            if (p.first == p.second)
+                continue;
+            dry_segments[p.first] = p.second;
          
-         
+        }
+        
+        if (iteration % 10 == 0)
+            cout << "==============================" << endl;
+        
+        cout << iteration << ": " << raindrop_start_point << endl;
+        for (auto& s : dry_segments) {
+            cout << s.first << "--" << s.second << " ";
+        }
+        cout << endl;
         
     }
     
@@ -91,5 +164,7 @@ int main(int argc, const char * argv[]) {
     }
     cout << endl;
   */
+    
+    raindrop_simulation(1, 10, gen);
     return 0;
 }
