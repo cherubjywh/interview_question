@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<cmath>
 
 using namespace std;
 
@@ -110,11 +111,74 @@ void pitfall_constructor_initialize_members() {
 	A_init_members_correct<int> A_correct(10);
 }
 
+class Point {
+	public:
+		// Default arguments can lead to unintended calls. Only use defaults if all resulting call patterns are meaningful
+		// e.g. Gaussian noisy is by default white noise, i.e. 0 mean and 1 variance
+		Point (double x = 0, double y = 0):_x(x), _y(y) {}
+		void print() {cout << "Point.x: " << _x << ", Point.y: " << _y << endl;}
+	private:
+		double _x, _y;
+};
+
+
+void pitfall_constructor_default_arguments() {
+	double a = 10.0, r = 5.0, x = 3.0, y = 1.0;
+	Point p = (x + r * cos(a), y + r * sin(a));
+	p.print();
+	
+}
+
+namespace constructor_virtual_function {
+	enum Color {
+		BLACK,
+		RED,
+		WHITE
+	};
+
+	class Shape {
+		public:
+			Shape() { reset(); }
+			void print_color() {
+				switch (_color)  {
+				case Color::BLACK:
+					cout << "Black\n";
+					break;
+				case Color::RED:
+					cout << "Red\n";
+					break;
+				case Color::WHITE:
+					cout << "White\n";
+				}
+			}
+		private:
+			virtual void reset() {_color = Color::BLACK; cout << "Shape\n";}
+			Color _color;
+	};
+
+	class Point : public Shape {
+		public:
+		private:
+			// void reset() {Shape::reset();}
+			void reset() {cout << "Point\n";}
+			double _x, _y;
+	};
+};
+
+void pitfall_constructor_virtual_function () {
+	// reset of Shape is called rather than reset of Point
+	constructor_virtual_function::Point p;
+	p.print_color();
+}
+
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
 	// pitfall_constructor_2();
 	// pitfall_new_1();
-	pitfall_constructor_initialize_members();
+	// pitfall_constructor_initialize_members();
+	// pitfall_constructor_default_arguments();
+	pitfall_constructor_virtual_function();
 
 }
