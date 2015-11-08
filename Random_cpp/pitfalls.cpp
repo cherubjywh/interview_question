@@ -2,6 +2,13 @@
 #include<string>
 #include<cmath>
 
+/*
+   This file is intened for testing many pitfalls of using C++. There are multiple (tricky) traps in the code... And several warnings even the code compiles...
+
+   The code is to help me be prepared and aware of all the pitfalls in wrting C++ code...
+
+   */
+
 using namespace std;
 
 void pitfall_constructor_1() {
@@ -297,6 +304,55 @@ void pitfall_virtual_destructor() {
 	delete e;
 }
 
+namespace double_free_destructor {
+	class Employee {
+		public:
+			Employee(string name) : _name(name) {}
+			virtual ~Employee() {}
+			string get_name() const {return _name;}
+		protected:
+			string _name;
+	};
+
+	class Manager: public Employee {
+		// Moral: A class with a destructor needs a copy constructor
+		// The Big 3: It is not just a good idea -- it is the law (Marshall Cline)
+		// The original example is not quite good for explaining why both copy constructor and overloading operator are necessary
+		// They are for different ocassions for sure, and cannot replace each other
+		// Copy constructor is used for initializing an object
+		// = is used for overwriting or assiging one object to another existing object
+		// One more note: use const to add more conditions, and force the compilar to do more checks for you, maily for the purpose of getting semantic correct
+		public:
+			Manager(string name, string sname) : Employee(name), _secretary(new Employee(sname)) {}
+			Manager(Manager& m): Employee(m.get_name()), _secretary(new Employee(m.get_sname())) {
+				cout << "In Manger's copy Constructor\n";
+			}
+			Manager& operator=(const Manager& m) {
+				cout << "In Manger's overloading operator function\n";
+
+
+				_name = m.get_name();
+				if (_secretary != nullptr) {
+					delete _secretary;
+				}
+				_secretary = new Employee(m.get_sname());
+				return *this;
+			}
+			string get_sname() const {return _secretary -> get_name();}
+			~Manager() {delete _secretary;}
+		private:
+			Employee* _secretary;
+	};
+};
+
+void pitfall_double_free_destructor () {
+	using namespace double_free_destructor;
+	Manager m1("AA", "BB");
+	Manager m2 = m1;
+	Manager m3("CC", "DD");
+	m3 = m2;
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -308,6 +364,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_test_constructor_order();
 	// pitfall_pure_virtual_function();
 	// pitfall_virtual_and_pure_virtual();
-	pitfall_virtual_destructor();
+	// pitfall_virtual_destructor();
+	pitfall_double_free_destructor();
 
 }
