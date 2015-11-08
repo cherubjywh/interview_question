@@ -171,6 +171,85 @@ void pitfall_constructor_virtual_function () {
 	p.print_color();
 }
 
+namespace test_constructor {
+	class Shape {
+		public:
+			Shape() {cout << "In Shape Constructor\n";}
+	};
+
+	class Point: public Shape {
+		public:
+			Point() {cout << "In Point Constructor\n";}
+	};
+};
+
+void pitfall_test_constructor_order() {
+	test_constructor::Point p;
+}
+
+namespace test_pure_virtual_function {
+	class Shape {
+		public:
+			Shape() {
+				cout << "In Shape Constructor\n";
+				print();
+			}
+		private:
+			virtual void print() = 0;
+	};
+
+	class Point : public Shape {
+		public:
+			Point() {
+				cout << "In Point Constructor\n";
+			}
+		private:
+			void print() {
+				cout << "In Point Print()\n";
+			}
+	};
+};
+
+void pitfall_pure_virtual_function () {
+	test_pure_virtual_function::Point p;
+	// will never success...
+	// The previous line calls pure virtual function...
+	cout << "Successfully initialize a Point instance p\n";
+}
+
+namespace test_virtual_and_pure_virtual {
+	class Shape {
+		public:
+			virtual void foo_virtual() {
+				cout << "virtual in Shape\n";
+			}
+			virtual void foo_virtual_2() {
+				cout << "virtual 2 in Shape\n";
+			}
+			virtual void foo_pure_virtual() = 0;
+	};
+	class Point:public Shape {
+		public:
+			// I didn't implement the virtual function foo_virtual here. It works fine. When I call foo_virtual using a Point, the foo_virtual function of Shape will be called.
+			void foo_virtual_2() {
+				cout << "virtual 2 in Point\n";
+			}
+			void foo_pure_virtual() {
+				cout << "pure virtual in Point\n";
+			}
+	};
+};
+
+void pitfall_virtual_and_pure_virtual () {
+	test_virtual_and_pure_virtual::Point p;
+	p.foo_virtual();
+	p.foo_virtual_2();
+	p.foo_pure_virtual();
+	test_virtual_and_pure_virtual::Shape & s = p;
+	// This should compile
+	s.foo_virtual();
+	s.foo_virtual_2();
+}
 
 int main(int argc, char* argv[]) {
 
@@ -179,6 +258,8 @@ int main(int argc, char* argv[]) {
 	// pitfall_new_1();
 	// pitfall_constructor_initialize_members();
 	// pitfall_constructor_default_arguments();
-	pitfall_constructor_virtual_function();
-
+	// pitfall_constructor_virtual_function();
+	// pitfall_test_constructor_order();
+	// pitfall_pure_virtual_function();
+	pitfall_virtual_and_pure_virtual();
 }
