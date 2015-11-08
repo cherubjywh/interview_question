@@ -353,6 +353,78 @@ void pitfall_double_free_destructor () {
 	m3 = m2;
 }
 
+namespace inheritance_pitfall_overriding {
+	class Employee {
+		public:
+			virtual void print() {
+				cout << "print() of Employee\n";
+			}
+	};
+
+	class Manager : public Employee {
+		public:
+			virtual void print() {
+				// need to explicitely specify that the print is from the base class
+				Employee::print ();
+				cout << "print() of Manager\n";
+			}
+	};
+}
+
+void pitfall_inheritance_overriding () {
+	using namespace inheritance_pitfall_overriding;
+	Manager m;
+	m.print();
+}
+
+namespace inheritance_pitfall_pointer {
+	class Employee {
+		public:
+			Employee(string name):_name(name){}
+			string get_name() const {return _name;}
+			void print() {
+				cout << "print of Employee\n";
+				cout << _name << endl;
+			}
+		protected:
+			string _name;
+	};
+	class Manager: public Employee {
+		public:
+			Manager(): Employee("foo"){
+				_sname = "bar";
+			}
+			Manager(string name, string sname):Employee(name), _sname(sname){}
+			string get_sname() const {return _sname;}
+			Manager& operator=(const Manager& m) {
+				_name = m.get_name();
+				_sname = m.get_sname();
+				return *this;
+			}
+			//void print() {cout << "print of Manager\n";}
+		private:
+			string _sname;
+	};
+	void pitfall_function(Employee* e, int sz) {
+		// *** the sizeof(Employee) is not the same as sizeof(Manager)
+		// So the e[1] is not working as expected
+		// We want to print A2, but it is actually prints B1
+		if (sz > 1) {
+			e[1].print();
+		}
+	}
+};
+
+void pitfall_inheritance_pointer () {
+	using namespace inheritance_pitfall_pointer;
+	Manager m[2];
+	m[0] = Manager("A1", "B1");
+	m[1] = Manager("A2", "B2");
+	pitfall_function(m, 2);
+	cout << "sizeof(Employee): " << sizeof(Employee) << endl;
+	cout << "sizeof(Manager): " << sizeof(Manager) << endl;
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -365,6 +437,8 @@ int main(int argc, char* argv[]) {
 	// pitfall_pure_virtual_function();
 	// pitfall_virtual_and_pure_virtual();
 	// pitfall_virtual_destructor();
-	pitfall_double_free_destructor();
+	// pitfall_double_free_destructor();
+	// pitfall_inheritance_overriding();
+	pitfall_inheritance_pointer();
 
 }
