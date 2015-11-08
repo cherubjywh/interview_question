@@ -251,6 +251,52 @@ void pitfall_virtual_and_pure_virtual () {
 	s.foo_virtual_2();
 }
 
+namespace virtual_destructor{
+	class Employee {
+		public:
+			Employee(string name) : _name(name) {
+				cout << "In Constructor of Employee\n";
+			}
+			// I got these words from Stack Overflow: To sum up, always make base classes' destructors virtual when they're meant to be manipulated polymorphically.
+			virtual ~Employee() {
+				cout << "In Destructor of Employee\n";
+			}
+			/*
+
+			   // This is a wrong demonstration of destructor function: It will cause memory leaking if it is used polymorphically.
+			   // The destructor of inherited class will not be call due to static binding
+
+			~Employee() {
+				cout << "In Destructor of Employee\n";
+			}
+			*/
+
+		private:
+			string _name;
+	};
+
+	class Manager: public Employee {
+		public:
+			// Because there is no default constructor, the inherite class must explicitly initialize parent class.
+			Manager(string name, string dept):Employee(name), _dept(dept) {
+				cout << "In Constructor of Manager\n";
+			}
+			~Manager() {
+				cout << "In Destructor of Manager\n";
+			}
+		private:
+			string _name;
+			string _dept;
+	};
+};
+
+void pitfall_virtual_destructor() {
+	using namespace virtual_destructor;
+	//Manager m("AA", "BB");
+	Employee* e = new Manager("AA", "BB");	
+	delete e;
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -261,5 +307,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_constructor_virtual_function();
 	// pitfall_test_constructor_order();
 	// pitfall_pure_virtual_function();
-	pitfall_virtual_and_pure_virtual();
+	// pitfall_virtual_and_pure_virtual();
+	pitfall_virtual_destructor();
+
 }
