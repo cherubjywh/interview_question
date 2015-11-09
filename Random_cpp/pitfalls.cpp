@@ -425,6 +425,47 @@ void pitfall_inheritance_pointer () {
 	cout << "sizeof(Manager): " << sizeof(Manager) << endl;
 }
 
+namespace pitfall_operator_assignment{
+	class Employee {
+		public:
+			Employee(char *name); 
+			Employee(const Employee&);
+			Employee& operator=(const Employee&);
+		private:
+			char * _name;
+	};
+
+	class Manager: public Employee {
+		public:
+			Manager(char *name, char *dept);
+			Manager(const Manager& m) ;
+			Manager &operator=(const Manager&);	
+		private:
+			char * _dept;
+	};
+
+
+	Employee::Employee(char *name) {
+	}
+
+	Employee::Employee(const Employee& e) {
+	}
+
+	Employee& Employee::operator=(const Employee& e) {
+		return *this;
+	}
+
+	Manager::Manager(char *name, char* dept) : Employee(name) {
+	}
+
+	Manager::Manager(const Manager& m) {
+	}
+
+	Manager& Manager::operator=(const Manager& m) {
+		return *this;
+	}
+};
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
