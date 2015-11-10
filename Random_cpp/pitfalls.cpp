@@ -431,7 +431,8 @@ namespace pitfall_operator_assignment{
 			Employee(char *name); 
 			Employee(const Employee&);
 			Employee& operator=(const Employee&);
-		private:
+			virtual ~Employee() {delete _name;}
+		protected:
 			char * _name;
 	};
 
@@ -440,31 +441,66 @@ namespace pitfall_operator_assignment{
 			Manager(char *name, char *dept);
 			Manager(const Manager& m) ;
 			Manager &operator=(const Manager&);	
+			virtual ~Manager() {delete _dept;}
+			void print() {
+				printf("dept: %s\n", _dept);
+				printf("name: %s\n", _name);
+			}
 		private:
 			char * _dept;
 	};
 
 
-	Employee::Employee(char *name) {
+	Employee::Employee(char *name): _name(new char[strlen(name) + 1]) {
+		strcpy(_name, name);
 	}
 
-	Employee::Employee(const Employee& e) {
+	Employee::Employee(const Employee& e) : _name(new char[strlen(e._name) + 1]){
+		strcpy(_name, e._name);	
 	}
 
 	Employee& Employee::operator=(const Employee& e) {
+		strcpy(_name, e._name);
 		return *this;
 	}
 
-	Manager::Manager(char *name, char* dept) : Employee(name) {
+	Manager::Manager(char *name, char* dept) : Employee(name), _dept(new char[strlen(dept) + 1]) {
+		strcpy(_dept, dept);
 	}
 
-	Manager::Manager(const Manager& m) {
+
+	Manager::Manager(const Manager& m) : Manager(m._name, m._dept){
+		_dept = new char[strlen(m._dept) + 1] ;
+		strcpy(_dept, m._dept);	
 	}
 
 	Manager& Manager::operator=(const Manager& m) {
+		// Here need to explicitely call base class copy operator
+		Employee::operator=(m);
+		strcpy(_dept, m._dept);
 		return *this;
 	}
 };
+
+void pitfall_inheritance_assign_op () {
+	using namespace pitfall_operator_assignment;
+	string AA = "AA";
+	string BB = "BB";
+	char * AA_char = new char[AA.size() + 1];
+	char * BB_char = new char[BB.size() + 1];
+	copy(AA.begin(), AA.end(), AA_char);
+	copy(BB.begin(), BB.end(), BB_char);
+	Manager m1(AA_char, BB_char);
+	Manager m2(BB_char, AA_char);
+	cout << "Before ----\n";
+	m2.print();
+	m2 = m1;
+	cout << "After ----\n";
+	m2.print();
+
+	delete AA_char;
+	delete BB_char;
+}
 
 int main(int argc, char* argv[]) {
 
@@ -480,6 +516,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_virtual_destructor();
 	// pitfall_double_free_destructor();
 	// pitfall_inheritance_overriding();
-	pitfall_inheritance_pointer();
+	// pitfall_inheritance_pointer();
+	pitfall_inheritance_assign_op();
 
 }
