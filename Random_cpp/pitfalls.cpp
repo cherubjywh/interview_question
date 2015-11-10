@@ -460,6 +460,8 @@ namespace pitfall_operator_assignment{
 	}
 
 	Employee& Employee::operator=(const Employee& e) {
+		delete _name;
+		_name = new char[strlen(e._name) + 1];
 		strcpy(_name, e._name);
 		return *this;
 	}
@@ -477,6 +479,8 @@ namespace pitfall_operator_assignment{
 	Manager& Manager::operator=(const Manager& m) {
 		// Here need to explicitely call base class copy operator
 		Employee::operator=(m);
+		delete _dept;
+		_dept = new char[strlen(m._dept) + 1];
 		strcpy(_dept, m._dept);
 		return *this;
 	}
