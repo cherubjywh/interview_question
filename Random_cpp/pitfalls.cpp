@@ -625,6 +625,7 @@ namespace pitfall_operator_overloading {
 			}
 			Complex (const Complex &b):_re(b._re), _im(b._im) {
 				cout << "In Copy Constructor of Complex\n";
+
 			}
 			Complex operator+ (const Complex& b) const {
 				return Complex(_re + b._re, _im + b._im);
@@ -665,9 +666,11 @@ namespace pitfall_operator_overloading {
 
 void pitfall_operator_precedence () {
 	using namespace pitfall_operator_overloading;
-	Complex i(0, 1);
+	Complex i(2, 1);
 	Complex j((i ^ (2.0 + 1)));
-	cout << j << endl;
+	Complex k(j);
+	// quite tricky
+	cout << (k = k + 1.0) << endl;
 }
 
 int main(int argc, char* argv[]) {
