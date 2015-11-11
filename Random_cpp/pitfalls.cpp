@@ -617,6 +617,59 @@ void pitfall_stream () {
 
 }
 
+namespace pitfall_operator_overloading {
+	class Complex {
+		public:
+			Complex (double re = 0.0, double im = 0.0):_re(re), _im(im) {
+				cout << "In Standard Constructor of Complex\n";
+			}
+			Complex (const Complex &b):_re(b._re), _im(b._im) {
+				cout << "In Copy Constructor of Complex\n";
+			}
+			Complex operator+ (const Complex& b) const {
+				return Complex(_re + b._re, _im + b._im);
+			}
+			Complex operator* (const Complex& b) const {
+				return Complex(_re*b._re - _im*b._im, _re*b._im + _im*b._re);
+			}
+			Complex operator/ (const Complex& b) const {
+				// (a + bi)/(c + di)
+				// = (ac - bd + (ad + bc)i)/(cc -dd + 2(cd)i)
+				double num_re = _re * b._re - _im * b._im;
+				double num_im = _re * b._im + _im * b._re;
+				double denum = b._re * b._re - b._im * b._im + 2.0 * b._re * b._im;
+				return Complex(num_re/denum, num_im/denum);
+			}
+			Complex operator^(const Complex& b) const {
+				// I don't really know how to compute this...
+				cout << "In Operator ^ of Complex\n";
+				return Complex(pow(_re, b._re), 0);
+			}
+			Complex & operator=(const Complex& b) {
+				_re = b._re;
+				_im = b._im;
+
+				return *this;
+			}
+
+			friend ostream& operator<<(ostream& os, Complex & b) {
+				os << b._re << " + " << b._im << "i";
+				return os;
+			}
+
+		private:
+			double _re;
+			double _im;
+	};
+};
+
+void pitfall_operator_precedence () {
+	using namespace pitfall_operator_overloading;
+	Complex i(0, 1);
+	Complex j((i ^ (2.0 + 1)));
+	cout << j << endl;
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -634,6 +687,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_inheritance_pointer();
 	// pitfall_inheritance_assign_op();
 	// pitfall_test_default_constructor();
-	pitfall_stream();
+	// pitfall_stream();
+	pitfall_operator_precedence();
 
 }
