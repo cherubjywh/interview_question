@@ -653,8 +653,18 @@ namespace pitfall_operator_overloading {
 				return *this;
 			}
 
+			// Two ways to overload <<
+			// 1. Make << a frind function of the class
+
 			friend ostream& operator<<(ostream& os, Complex & b) {
 				os << b._re << " + " << b._im << "i";
+				return os;
+			}
+
+
+			// 2. Make << a member of the class
+			ostream& operator<<(ostream& os) {
+				os << _re << "+" << _im << "i";
 				return os;
 			}
 
@@ -670,7 +680,9 @@ void pitfall_operator_precedence () {
 	Complex j((i ^ (2.0 + 1)));
 	Complex k(j);
 	// quite tricky
+	// k + 1.0 return something, which will be able to access out of the original function
 	cout << (k = k + 1.0) << endl;
+	cout << k << endl;
 }
 
 int main(int argc, char* argv[]) {
