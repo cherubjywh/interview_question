@@ -1,6 +1,9 @@
 #include<iostream>
 #include<string>
 #include<cmath>
+#include<iostream>
+#include<fstream>
+#include<list>
 
 /*
    This file is intened for testing many pitfalls of using C++. There are multiple (tricky) traps in the code... And several warnings even the code compiles...
@@ -466,6 +469,11 @@ namespace pitfall_operator_assignment{
 		return *this;
 	}
 
+	/*
+		If you don't speciy a call of base class Constructor, the default Constructor will be called, if any
+
+	   */
+
 	Manager::Manager(char *name, char* dept) : Employee(name), _dept(new char[strlen(dept) + 1]) {
 		strcpy(_dept, dept);
 	}
@@ -506,6 +514,109 @@ void pitfall_inheritance_assign_op () {
 	delete BB_char;
 }
 
+
+namespace pitfall_default_constructor {
+	class A {
+		public:
+			A() {}
+			A(int a) {}
+	};
+
+	class B:public A {
+		public:
+			B() {}
+	};
+};
+
+void pitfall_test_default_constructor () {
+	using namespace pitfall_default_constructor;
+	B b;
+}
+
+void pitfall_stream () {
+	list <int> a;
+
+	// Moral: eof() is only useful in combination with fail(), to find out whether EOF was the cause for failure
+	ofstream myfile;
+	myfile.open("data.txt");
+	if (myfile.is_open()) {
+		myfile << "1\n2\n3\n4\n11\n12\n13\n14\n";
+	}
+	myfile.close();
+
+
+	myfile.open("data.txt", ios::out | ios::app);
+	if (myfile.is_open()) {
+		myfile << "21\n22\n23\n24";
+	}
+	myfile.close();
+
+	ifstream myinfile;
+	myinfile.open("data.txt");
+	if (myinfile.is_open()) {
+		string line;
+		// Moral: do not use eof() to check if the whole file has been read through; eof() is only used to check failure status
+		// Because if the stream state turns to fail, the end of file will never be reached. Such that the checking condition will never be reached. If we use that condition in the while loop, the loop will never stop.
+		// other useful functions: bad, eof, good, fail
+		while (getline(myinfile, line)) {
+			a.push_back(stoi(line));
+		}
+	}
+
+	myinfile.close();
+
+	for (auto i : a) {
+		cout << i << " ";
+	}
+	cout << endl;
+
+
+	list<int> b;
+
+	myinfile.open("data.txt");
+
+	// My note:
+	// eof() ==> not good()
+	// eof() <> fail()
+	
+	if (myinfile.is_open()) {
+		int x;
+		while (myinfile.good()) {
+			myinfile >> x;
+			if (myinfile.good()) b.push_back(x);
+		}
+	}
+	myinfile.close();
+
+	for (auto i : b) {
+		cout << i << " ";
+	}
+	cout << endl;
+
+
+	// The remdy is here, use fail() function
+	// Only fail is useful among all 4 status flags
+	list<int> c;
+
+	myinfile.open("data.txt");
+
+	if (myinfile.is_open()) {
+		int x;
+		while (myinfile) {
+			myinfile >> x;
+			if (myinfile) c.push_back(x);
+		}
+	}
+
+	myinfile.close();
+
+	for (auto i : c) {
+		cout << i << " ";
+	}
+	cout << endl;
+
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -521,6 +632,8 @@ int main(int argc, char* argv[]) {
 	// pitfall_double_free_destructor();
 	// pitfall_inheritance_overriding();
 	// pitfall_inheritance_pointer();
-	pitfall_inheritance_assign_op();
+	// pitfall_inheritance_assign_op();
+	// pitfall_test_default_constructor();
+	pitfall_stream();
 
 }
