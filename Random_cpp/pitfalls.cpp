@@ -685,6 +685,78 @@ void pitfall_operator_precedence () {
 	cout << k << endl;
 }
 
+
+namespace pitfall_array_grow_size {
+	class Array {
+		public:
+			Array(): _n(0), _a(nullptr){}
+			~Array() {
+				delete[] _a;
+				cout << "In Destructor function of Array\n";
+			}
+			Array(const Array& b) {
+				_n = b._n;
+				_a = new int[_n];
+				for (size_t i = 0; i < _n; ++i) {
+					_a[i] = b._a[i];
+				}
+			}
+			Array &operator=(const Array& b) {
+				if (_a) {
+					delete[] _a;
+				}
+				_n = b._n;
+				_a = new int[_n];
+				for (size_t i = 0; i < _n; ++i) {
+					_a[i] = b._a[i];
+				}
+
+				return *this;
+			}
+			int &operator[](size_t i) {
+				// It is a pretty bad idea to change the size of array by moving the whole new array
+				if(i >= _n) {
+					int *p = new int[i + 1];
+					for (size_t index = 0; index < _n; ++index) {
+						p[index] = _a[index];
+					}
+					for (size_t index = _n; index <= i; ++index) {
+						p[index] = 0;
+					}
+					delete[] _a;
+					_n = i + 1;
+					_a = p;
+
+				}
+				return _a[i];
+			}
+			friend ostream& operator<< (ostream& os, const Array& a) {
+				if (a._n == 0) 
+					return os;
+
+				for (size_t i = 0; i < a._n - 1; ++i) {
+					os << a._a[i] << ", ";
+				}
+				os << a._a[a._n - 1];
+				return os;
+			}
+		private:
+			size_t _n;
+			int* _a;
+	};
+};
+
+void pitfall_array_operator() {
+	//using namespace pitfall_array_grow_size;
+	pitfall_array_grow_size::Array a;
+	a[0] = 1;
+	a[1] = 2;
+	cout << &(a[0]) << endl;
+	a[2] = 3;
+	cout << &(a[0]) << endl;
+	cout << a << endl;
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -703,6 +775,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_inheritance_assign_op();
 	// pitfall_test_default_constructor();
 	// pitfall_stream();
-	pitfall_operator_precedence();
+	// pitfall_operator_precedence();
+	pitfall_array_operator();
 
 }
