@@ -4,6 +4,7 @@
 #include<iostream>
 #include<fstream>
 #include<list>
+#include<vector>
 
 /*
    This file is intened for testing many pitfalls of using C++. There are multiple (tricky) traps in the code... And several warnings even the code compiles...
@@ -757,6 +758,24 @@ void pitfall_array_operator() {
 	cout << a << endl;
 }
 
+
+// Note: auto_ptr, only one auto_ptr can own a heap object
+
+void pitfall_auto_ptr () {
+	// auto_ptr: smarter pointer, will release resources once the referred objects are not useful any more
+	auto_ptr<vector<int>> pt(new vector<int>());
+	pt -> push_back(0);
+	pt -> push_back(1);
+	pt -> push_back(2);
+	// The we do the copy. And the ownership of the vector will be handed over from pt to pt1
+	auto_ptr<vector<int>> pt1 = pt;
+	// The following line will not cause problem when we try tor compile it, but will cause problem in the running time. Since it is a null pointer already
+	// cout << pt -> size() << endl;
+	cout << pt1 -> size() << endl;
+	// It is very elegant to pass and return pointers using auto_ptr. Be sure to only use auto_ptr like that!!!
+	// Auto_ptr is not a "normal" object, the semantic meaning of copy is not the same as other objects
+}
+
 int main(int argc, char* argv[]) {
 
 	// pitfall_constructor_1();
@@ -776,6 +795,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_test_default_constructor();
 	// pitfall_stream();
 	// pitfall_operator_precedence();
-	pitfall_array_operator();
+	// pitfall_array_operator();
+	pitfall_auto_ptr();
 
 }
