@@ -1,0 +1,17 @@
+Review the pitfall article
+1. Stream pitfall: 4 flags only fail does the job
+2. Single-argument constructor serves as type conversions => avoid it or use explicit; otherwise, it could serve as type conversion
+3. Constructor initialize by definition order => Don’t use member variables in initialization
+4. Virtual destructor => So the derived class destructor will be called
+5. Copy constructor and = operator => Deep copy, otherwise double destructor
+6. Scope to call base class functions => If you want to call an overloaded base class function, use scope
+7. Overuse pointer => How point judge its size
+8. Constructor and destructor automatically call base class counterparts. But = operator does not; How to write really deep copy
+9. Overloading signs does not change their precedence => ^, which is bit or in c++ but power in many other languages
+10. Do not change the size of array, at least do not move the array space in heap
+11. FILE is not good, if error happens, the close will never be executed; use try-catch; or use fstream
+12. Copy of auto_ptr handles the ownership of an object
+13. Ordered containers, total-order function
+14. Strange behavior of container iterators
+
+Mortal: be careful with memory leaking. Destry everything before the ending of a program
