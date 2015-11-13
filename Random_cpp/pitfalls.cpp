@@ -797,5 +797,7 @@ int main(int argc, char* argv[]) {
 	// pitfall_operator_precedence();
 	// pitfall_array_operator();
 	pitfall_auto_ptr();
+	// all pitfalls have been lerned for the first time
+	// Start doing the second run
 
 }
