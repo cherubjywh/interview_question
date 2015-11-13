@@ -1,4 +1,5 @@
 #include<iostream>
+#include<time.h>
 
 using namespace std;
 
@@ -36,8 +37,36 @@ void using_tab_in_cout () {
 	}
 }
 
+void guessing_random_number() {
+
+	int input_val;
+	int target_val;
+
+	while(1) {
+		srand(time(NULL));
+		target_val = rand() % 10 + 1;
+		cout << "Target number: " << target_val << endl;
+		while (1) {
+			cout << "Enter a number: ";
+			if (!(cin >> input_val)) {
+				cin.clear();
+				cin.ignore(10000, '\n');
+			}
+			if (input_val == -1) {
+				cout << "Exit game!" << endl;
+				return;
+			}
+			if (input_val == target_val) {
+				cout << "You win!" << endl;
+				break;
+			}
+		}
+	}
+}
+
 int main() {
 
 	// get_some_input();
-	using_tab_in_cout();
+	// using_tab_in_cout();
+	guessing_random_number();
 }
