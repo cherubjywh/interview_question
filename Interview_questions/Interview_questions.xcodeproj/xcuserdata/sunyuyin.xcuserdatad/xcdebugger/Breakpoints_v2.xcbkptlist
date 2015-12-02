@@ -62,9 +62,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "raindrop_simulation(double raindrop_length, double total_length, random::mt19937&amp; gen)"
-            landmarkType = "7">
+            endingLineNumber = "75">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
             endingLineNumber = "51"
-            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt; temp_erase, double total_length)"
+            landmarkName = "is_intersect(double raindrop_start_point, double raindrop_length, double seg_start_point, double seg_end_point)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +124,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt; temp_erase, double total_length)"
-            landmarkType = "7">
+            endingLineNumber = "52">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,7 +155,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
             endingLineNumber = "53"
-            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt; temp_erase, double total_length)"
+            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt;&amp; temp_erase, double total_length)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -174,9 +170,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "is_intersect(double raindrop_start_point, double raindrop_length, double seg_start_point, double seg_end_point)"
-            landmarkType = "7">
+            endingLineNumber = "38">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -207,7 +201,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt; temp_erase, double total_length)"
+            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt;&amp; temp_erase, double total_length)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -239,7 +233,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt; temp_erase, double total_length)"
+            landmarkName = "process_dry_segments(map&lt;double, double&gt;&amp; dry_segments, map&lt;double, double&gt;::iterator&amp; iter, double raindrop_start_point, double raindrop_length, map&lt;double, double&gt;&amp; temp, set&lt;double&gt;&amp; temp_erase, double total_length)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -280,6 +274,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "raindrop_simulation(double, double, boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;)"
                   moduleName = "google_rain_drop"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sunyuyin/Documents/Workspace/CPP/interview_questions/Interview_questions/google_rain_drop/google_rain_drop.cpp"
                   timestampString = "468393271.889587"
                   startingColumnNumber = "9223372036854775807"
@@ -294,6 +289,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "raindrop_simulation(double, double, boost::random::mersenne_twister_engine&lt;unsigned int, 32ul, 624ul, 397ul, 31ul, 2567483615u, 11ul, 4294967295u, 7ul, 2636928640u, 15ul, 4022730752u, 18ul, 1812433253u&gt;&amp;)"
                   moduleName = "google_rain_drop"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sunyuyin/Documents/Workspace/CPP/interview_questions/Interview_questions/google_rain_drop/google_rain_drop.cpp"
                   timestampString = "468393271.889866"
                   startingColumnNumber = "9223372036854775807"
@@ -318,6 +314,22 @@
             startingLineNumber = "145"
             endingLineNumber = "145"
             landmarkName = "raindrop_simulation(double raindrop_length, double total_length, random::mt19937&amp; gen)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bulls_and_cows/main.cpp"
+            timestampString = "470008779.954119"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "getHint(string secret, string guess)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

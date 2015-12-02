@@ -4,20 +4,70 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Ballons.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>Interview_questions.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>alien_language.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>bulls_and_cows.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>google_rain_drop.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>graph_dfs.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>graph_problems.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>leetcode_292_nim_num.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>max_profit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>minPath.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>num_array.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>quick_sort.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>single_number.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>test_binary_tree.xcscheme</key>
 		<dict>
@@ -27,6 +77,41 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>B31421651C03A52D00A41EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B31421711C03C33B00A41EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B314217C1C03C6EF00A41EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B314219E1C05402200A41EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B31421A91C057F4A00A41EEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3604E6B1C0AC884009E8467</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3604E761C0C2C97009E8467</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B36EF0F21BE7C85F0090CF3F</key>
 		<dict>
 			<key>primary</key>
@@ -43,6 +128,21 @@
 			<true/>
 		</dict>
 		<key>B36EF1231BE9E8070090CF3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B396963D1C0E6CC900408358</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B39696481C0EB88100408358</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3BF8E841C0A177F00553326</key>
 		<dict>
 			<key>primary</key>
 			<true/>
